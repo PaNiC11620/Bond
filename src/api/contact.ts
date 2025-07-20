@@ -9,7 +9,9 @@ export interface ContactMessage extends ContactMessageData {
   created_at: string;
 }
 
-const API_BASE_URL = 'http://localhost:3001/api';
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+  ? '/api' 
+  : 'http://localhost:3001/api';
 
 export async function createContactMessage(message: ContactMessageData): Promise<ContactMessage> {
   try {

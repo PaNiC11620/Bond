@@ -15,7 +15,9 @@ export interface Order extends OrderData {
   updated_at: string;
 }
 
-const API_BASE_URL = 'http://localhost:3001/api';
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+  ? '/api' 
+  : 'http://localhost:3001/api';
 
 export async function createOrder(order: OrderData): Promise<Order> {
   try {

@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 import { ordersDB, contactDB, initDatabase, testConnection, createDatabaseIfNotExists } from '../lib/database.js';
 
 dotenv.config({ path: '.env.local' });
@@ -13,6 +14,17 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../dist')));
+  
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
+  });
+}
 
 app.post('/api/orders', async (req, res) => {
   try {
