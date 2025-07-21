@@ -11,12 +11,8 @@ console.log('- User:', process.env.DB_USER || 'postgres');
 console.log('- Password:', process.env.DB_PASSWORD ? '***' : 'НЕ ВСТАНОВЛЕНО');
 
 const pool = new Pool({
-  host: process.env.DB_HOST || process.env.PGHOST || 'localhost',
-  port: parseInt(process.env.DB_PORT || process.env.PGPORT || '5432'),
-  database: process.env.DB_NAME || process.env.PGDATABASE || 'bond_coffee',
-  user: process.env.DB_USER || process.env.PGUSER || 'postgres',
-  password: process.env.DB_PASSWORD || process.env.PGPASSWORD,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  connectionString: process.env.DATABASE_URL, 
+  ssl: { rejectUnauthorized: false },
 });
 
 export interface Order {
