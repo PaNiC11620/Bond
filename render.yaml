@@ -1,6 +1,6 @@
 services:
   # PostgreSQL Database
-  - type: pgsql
+  - type: postgres
     name: bond-coffee-db
     databaseName: bond_coffee
     user: bond_user
