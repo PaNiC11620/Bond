@@ -8,10 +8,10 @@
     "client": "vite",
     "server": "tsx watch src/server/index.ts",
     "build": "npx vite build",
-    "start": "node dist/server/index.js",
-    "build:server": "npx tsc src/server/index.ts src/lib/database.ts --outDir dist --target es2020 --module commonjs --esModuleInterop --allowSyntheticDefaultImports --resolveJsonModule --skipLibCheck --moduleResolution node",
+    "build:client": "npx vite build",
     "build:server": "npx tsc --project tsconfig.server.json",
-    "build:all": "npx vite build && npm run build:server",
+    "build:all": "npm run build:client && npm run build:server",
+    "start": "node dist/server/index.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

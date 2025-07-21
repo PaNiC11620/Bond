@@ -3,11 +3,13 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
 import { ordersDB, contactDB, initDatabase, testConnection, createDatabaseIfNotExists } from '../lib/database.js';
 
 // ES modules compatibility
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const require = createRequire(import.meta.url);
 
 // Завантажуємо змінні середовища
 dotenv.config({ path: '.env.local' });

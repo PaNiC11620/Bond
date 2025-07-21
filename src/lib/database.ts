@@ -2,19 +2,18 @@ import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
 // Завантажуємо змінні середовища
-dotenv.config({ path: '.env.local' });
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config({ path: '.env.local' });
+}
 
 console.log('🔧 Налаштування бази даних:');
-console.log('- Host:', process.env.DB_HOST || 'localhost');
-console.log('- Port:', process.env.DB_PORT || '5432');
-console.log('- Database:', process.env.DB_NAME || 'bond_coffee');
-console.log('- User:', process.env.DB_USER || 'postgres');
-console.log('- Password:', process.env.DB_PASSWORD ? '***' : 'НЕ ВСТАНОВЛЕНО');
+console.log('- Environment:', process.env.NODE_ENV || 'development');
+console.log('- Database URL:', process.env.DATABASE_URL ? 'ВСТАНОВЛЕНО' : 'НЕ ВСТАНОВЛЕНО');
 
 // Налаштування підключення до PostgreSQL
 const pool = new Pool({
-  // Render використовує DATABASE_URL для підключення
-  connectionString: process.env.DATABASE_URL || `postgresql://${process.env.DB_USER || 'postgres'}:${process.env.DB_PASSWORD}@${process.env.DB_HOST || 'localhost'}:${process.env.DB_PORT || '5432'}/${process.env.DB_NAME || 'bond_coffee'}`,
+  connectionString: process.env.DATABASE_URL || 
+    `postgresql://${process.env.DB_USER || 'postgres'}:${process.env.DB_PASSWORD}@${process.env.DB_HOST || 'localhost'}:${process.env.DB_PORT || '5432'}/${process.env.DB_NAME || 'bond_coffee'}`,
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
 });
 
