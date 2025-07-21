@@ -4,28 +4,33 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { ordersDB, contactDB, initDatabase, testConnection, createDatabaseIfNotExists } from '../lib/database.js';
 
+// Завантажуємо змінні середовища
 dotenv.config({ path: '.env.local' });
 
 const app = express();
-const PORT = process.env.SERVER_PORT || 3001;
+const PORT = process.env.PORT || process.env.SERVER_PORT || 3001;
 
+// Middleware
 app.use(cors({
   origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
   credentials: true
 }));
 app.use(express.json());
 
+// Serve static files from the dist directory in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../dist')));
+  app.use(express.static(path.join(__dirname, '../../dist')));
   
+  // Handle React routing, return all requests to React app
   app.get('*', (req, res, next) => {
     if (req.path.startsWith('/api')) {
       return next();
     }
-    res.sendFile(path.join(__dirname, '../dist/index.html'));
+    res.sendFile(path.join(__dirname, '../../dist/index.html'));
   });
 }
 
+// Маршрути для замовлень
 app.post('/api/orders', async (req, res) => {
   try {
     console.log('📝 Отримано нове замовлення:', req.body);
@@ -143,6 +148,7 @@ app.delete('/api/orders/:id', async (req, res) => {
   }
 });
 
+// Маршрути для контактних повідомлень
 app.post('/api/contact', async (req, res) => {
   try {
     console.log('📧 Отримано нове повідомлення:', req.body);
@@ -206,6 +212,7 @@ app.delete('/api/contact/:id', async (req, res) => {
   }
 });
 
+// Маршрут для перевірки здоров'я сервера
 app.get('/api/health', async (req, res) => {
   const dbConnected = await testConnection();
   res.json({
@@ -216,11 +223,13 @@ app.get('/api/health', async (req, res) => {
   });
 });
 
+// Запуск сервера
 const startServer = async () => {
   try {
     console.log('🚀 Запуск сервера Bond Coffee...');
     console.log('📋 Перевіряємо налаштування...');
 
+    // Перевіряємо наявність необхідних змінних середовища
     if (!process.env.DB_PASSWORD) {
       console.error('❌ КРИТИЧНА ПОМИЛКА: DB_PASSWORD не встановлено в .env.local');
       console.log('💡 Створіть файл .env.local та додайте:');
@@ -232,8 +241,10 @@ const startServer = async () => {
       process.exit(1);
     }
 
+    // Спочатку перевіряємо підключення
     let dbConnected = await testConnection();
     
+    // Якщо база не існує, спробуємо її створити
     if (!dbConnected) {
       try {
         console.log('🔧 Спробуємо створити базу даних...');
@@ -257,8 +268,10 @@ const startServer = async () => {
       process.exit(1);
     }
 
+    // Ініціалізуємо структуру бази даних
     await initDatabase();
 
+    // Запускаємо сервер
     app.listen(PORT, () => {
       console.log('\n🎉 Сервер Bond Coffee успішно запущено!');
       console.log(`🌐 Frontend: http://localhost:5173`);

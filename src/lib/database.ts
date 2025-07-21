@@ -1,6 +1,7 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
+// Завантажуємо змінні середовища
 dotenv.config({ path: '.env.local' });
 
 console.log('🔧 Налаштування бази даних:');
@@ -10,15 +11,14 @@ console.log('- Database:', process.env.DB_NAME || 'bond_coffee');
 console.log('- User:', process.env.DB_USER || 'postgres');
 console.log('- Password:', process.env.DB_PASSWORD ? '***' : 'НЕ ВСТАНОВЛЕНО');
 
+// Налаштування підключення до PostgreSQL
 const pool = new Pool({
-  host: process.env.DB_HOST || process.env.PGHOST || 'localhost',
-  port: parseInt(process.env.DB_PORT || process.env.PGPORT || '5432'),
-  database: process.env.DB_NAME || process.env.PGDATABASE || 'bond_coffee',
-  user: process.env.DB_USER || process.env.PGUSER || 'postgres',
-  password: process.env.DB_PASSWORD || process.env.PGPASSWORD,
+  // Render використовує DATABASE_URL для підключення
+  connectionString: process.env.DATABASE_URL || `postgresql://${process.env.DB_USER || 'postgres'}:${process.env.DB_PASSWORD}@${process.env.DB_HOST || 'localhost'}:${process.env.DB_PORT || '5432'}/${process.env.DB_NAME || 'bond_coffee'}`,
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
 });
 
+// Типи для бази даних
 export interface Order {
   id: number;
   customer_name: string;
@@ -57,6 +57,7 @@ export interface ContactMessageInput {
   message: string;
 }
 
+// Функції для роботи з замовленнями
 export const ordersDB = {
   async create(order: OrderInput): Promise<Order> {
     const query = `
@@ -103,6 +104,7 @@ export const ordersDB = {
   }
 };
 
+// Функції для роботи з контактними повідомленнями
 export const contactDB = {
   async create(message: ContactMessageInput): Promise<ContactMessage> {
     const query = `
@@ -139,18 +141,21 @@ export const contactDB = {
   }
 };
 
+// Функція для створення бази даних (якщо не існує)
 export const createDatabaseIfNotExists = async (): Promise<void> => {
   const dbName = process.env.DB_NAME || 'bond_coffee';
   
+  // Підключаємося до postgres бази для створення нової бази
   const adminPool = new Pool({
     host: process.env.DB_HOST || 'localhost',
     port: parseInt(process.env.DB_PORT || '5432'),
-    database: 'postgres', 
+    database: 'postgres', // Підключаємося до системної бази
     user: process.env.DB_USER || 'postgres',
     password: process.env.DB_PASSWORD,
   });
 
   try {
+    // Перевіряємо, чи існує база даних
     const checkQuery = `SELECT 1 FROM pg_database WHERE datname = $1`;
     const result = await adminPool.query(checkQuery, [dbName]);
     
@@ -169,10 +174,12 @@ export const createDatabaseIfNotExists = async (): Promise<void> => {
   }
 };
 
+// Функція для ініціалізації бази даних
 export const initDatabase = async (): Promise<void> => {
   try {
     console.log('🔧 Ініціалізація структури бази даних...');
     
+    // Створюємо таблицю замовлень, якщо вона не існує
     await pool.query(`
       CREATE TABLE IF NOT EXISTS orders (
         id SERIAL PRIMARY KEY,
@@ -189,6 +196,7 @@ export const initDatabase = async (): Promise<void> => {
       )
     `);
 
+    // Створюємо таблицю контактних повідомлень
     await pool.query(`
       CREATE TABLE IF NOT EXISTS contact_messages (
         id SERIAL PRIMARY KEY,
@@ -199,6 +207,7 @@ export const initDatabase = async (): Promise<void> => {
       )
     `);
 
+    // Створюємо індекси для оптимізації
     await pool.query(`
       CREATE INDEX IF NOT EXISTS idx_orders_created_at ON orders(created_at DESC)
     `);
@@ -211,6 +220,7 @@ export const initDatabase = async (): Promise<void> => {
       CREATE INDEX IF NOT EXISTS idx_contact_messages_created_at ON contact_messages(created_at DESC)
     `);
 
+    // Створюємо функцію для автоматичного оновлення updated_at
     await pool.query(`
       CREATE OR REPLACE FUNCTION update_updated_at_column()
       RETURNS TRIGGER AS $$
@@ -221,6 +231,7 @@ export const initDatabase = async (): Promise<void> => {
       $$ language 'plpgsql'
     `);
 
+    // Створюємо тригер для автоматичного оновлення updated_at
     await pool.query(`
       DROP TRIGGER IF EXISTS update_orders_updated_at ON orders
     `);
@@ -239,6 +250,7 @@ export const initDatabase = async (): Promise<void> => {
   }
 };
 
+// Функція для перевірки підключення до бази даних
 export const testConnection = async (): Promise<boolean> => {
   try {
     console.log('🔍 Перевіряємо підключення до PostgreSQL...');

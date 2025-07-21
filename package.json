@@ -2,14 +2,16 @@
   "name": "vite-react-typescript-starter",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "client": "vite",
     "server": "tsx watch src/server/index.ts",
     "build": "vite build",
     "start": "node dist/server/index.js",
-    "build:server": "tsc src/server/index.ts --outDir dist --target es2020 --module commonjs --esModuleInterop --allowSyntheticDefaultImports --resolveJsonModule",
+    "build:server": "npx tsc src/server/index.ts --outDir dist --target es2020 --module commonjs --esModuleInterop --allowSyntheticDefaultImports --resolveJsonModule --skipLibCheck",
     "build:all": "npm run build && npm run build:server",
+    "postbuild": "npm run build:server",
     "lint": "eslint .",
     "preview": "vite preview"
   },
