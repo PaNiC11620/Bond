@@ -10,10 +10,10 @@ console.log('🔧 Налаштування бази даних:');
 console.log('- Environment:', process.env.NODE_ENV || 'development');
 console.log('- Database URL:', process.env.DATABASE_URL ? 'ВСТАНОВЛЕНО (Render PostgreSQL)' : 'НЕ ВСТАНОВЛЕНО');
 
-// Налаштування підключення до PostgreSQL
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
+  connectionString: process.env.DATABASE_URL || 
+    'postgresql://bond_user:X1fbNEWIXUUo12pkyxZlDbUdK2QSYLjh@dpg-d1v7k2ruibrs7395bju0-a.frankfurt-postgres.render.com/db_63dv',
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
 });
 
 // Типи для бази даних
@@ -227,17 +227,17 @@ export const testConnection = async (): Promise<boolean> => {
     console.error('Деталі помилки:', error);
     
     if (error instanceof Error) {
-      if (error.message.includes('database') && error.message.includes('does not exist')) {
-        console.log('💡 Схоже, що база даних не існує. Спробуємо її створити...');
-        return false;
-      }
       if (error.message.includes('password authentication failed')) {
-        console.log('💡 Помилка аутентифікації. Перевірте пароль у .env.local');
+        console.log('💡 Помилка аутентифікації. Перевірте пароль у .env або на Render.');
         return false;
       }
-      if (error.message.includes('connection refused')) {
-        console.log('💡 PostgreSQL сервер не запущений або недоступний');
+      if (error.message.includes('connection refused') || error.message.includes('timeout')) {
+        console.log('💡 Не вдалося підключитися до хоста бази даних. Перевірте, чи доступна БД.');
         return false;
+      }
+      if (error.message.includes('database "db_63dv" does not exist')) {
+          console.log('💡 База даних за вказаним URL не знайдена. Перевірте DATABASE_URL.');
+          return false;
       }
     }
     
