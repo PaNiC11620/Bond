@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: bond-coffee
+    env: node
+    plan: free
+    buildCommand: npm ci && npm run build:all
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        value: postgresql://bond_user:X1fbNEWIXUUo12pkyxZlDbUdK2QSYLjh@dpg-d1v7k2ruibrs7395bju0-a.frankfurt-postgres.render.com/db_63dv
