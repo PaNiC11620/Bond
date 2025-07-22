@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
-import { ordersDB, contactDB, initDatabase, testConnection, createDatabaseIfNotExists } from '../lib/database.js';
+import { ordersDB, contactDB, initDatabase, testConnection } from '../lib/database.js';
 
 // ES modules compatibility
 const __filename = fileURLToPath(import.meta.url);
@@ -257,7 +257,6 @@ const startServer = async () => {
     if (!dbConnected) {
       try {
         console.log('🔧 Спробуємо створити базу даних...');
-        await createDatabaseIfNotExists();
         dbConnected = await testConnection();
       } catch (createError) {
         console.error('❌ Не вдалося створити базу даних:', createError);
