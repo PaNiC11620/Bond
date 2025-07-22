@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 // Завантажуємо змінні середовища
 if (process.env.NODE_ENV !== 'production') {
-  dotenv.config({ path: '.env.local' });
+  dotenv.config({ path: '.env' });
 }
 
 console.log('🔧 Налаштування бази даних:');
@@ -12,9 +12,8 @@ console.log('- Database URL:', process.env.DATABASE_URL ? 'ВСТАНОВЛЕН�
 
 // Налаштування підключення до PostgreSQL
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || 
-    'postgresql://bond_user:X1fbNEWIXUUo12pkyxZlDbUdK2QSYLjh@dpg-d1v7k2ruibrs7395bju0-a.frankfurt-postgres.render.com/db_63dv',
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
 });
 
 // Типи для бази даних
@@ -137,39 +136,6 @@ export const contactDB = {
     const query = 'DELETE FROM contact_messages WHERE id = $1';
     const result = await pool.query(query, [id]);
     return result.rowCount !== null && result.rowCount > 0;
-  }
-};
-
-// Функція для створення бази даних (якщо не існує)
-export const createDatabaseIfNotExists = async (): Promise<void> => {
-  const dbName = process.env.DB_NAME || 'bond_coffee';
-  
-  // Підключаємося до postgres бази для створення нової бази
-  const adminPool = new Pool({
-    host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process.env.DB_PORT || '5432'),
-    database: 'postgres', // Підключаємося до системної бази
-    user: process.env.DB_USER || 'postgres',
-    password: process.env.DB_PASSWORD,
-  });
-
-  try {
-    // Перевіряємо, чи існує база даних
-    const checkQuery = `SELECT 1 FROM pg_database WHERE datname = $1`;
-    const result = await adminPool.query(checkQuery, [dbName]);
-    
-    if (result.rows.length === 0) {
-      console.log(`📦 Створюємо базу даних "${dbName}"...`);
-      await adminPool.query(`CREATE DATABASE "${dbName}"`);
-      console.log(`✅ База даних "${dbName}" успішно створена`);
-    } else {
-      console.log(`✅ База даних "${dbName}" вже існує`);
-    }
-  } catch (error) {
-    console.error('❌ Помилка при створенні бази даних:', error);
-    throw error;
-  } finally {
-    await adminPool.end();
   }
 };
 
