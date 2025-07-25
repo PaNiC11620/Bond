@@ -1,7 +1,4 @@
 import Cookies from 'js-cookie';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env' });
 
 const ADMIN_CREDENTIALS = {
   username: process.env.VITE_ADMIN_USERNAME,
