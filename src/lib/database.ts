@@ -1,7 +1,6 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
-// Завантажуємо змінні середовища
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config({ path: '.env' });
 }

@@ -1,15 +1,15 @@
 import Cookies from 'js-cookie';
+import dotenv from 'dotenv';
 
-// Отримуємо дані з змінних середовища
+dotenv.config({ path: '.env' });
+
 const ADMIN_CREDENTIALS = {
-  username: import.meta.env.VITE_ADMIN_USERNAME,
-  password: import.meta.env.VITE_ADMIN_PASSWORD
+  username: process.env.VITE_ADMIN_USERNAME,
+  password: process.env.VITE_ADMIN_PASSWORD
 };
 
 const AUTH_COOKIE_NAME = import.meta.env.VITE_AUTH_COOKIE_NAME;
-const AUTH_COOKIE_EXPIRES = parseInt(import.meta.env.VITE_AUTH_COOKIE_EXPIRES);
-
-
+const AUTH_COOKIE_EXPIRES = parseInt(process.env.VITE_AUTH_COOKIE_EXPIRES || '1', 10);
 
 export interface AuthService {
   login: (username: string, password: string) => Promise<boolean>;
@@ -20,14 +20,11 @@ export interface AuthService {
 
 export const authService: AuthService = {
   async login(username: string, password: string): Promise<boolean> {
-    // Симуляція затримки мережі
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
-      // Створюємо простий токен (в реальному проекті використовуйте JWT)
       const token = btoa(`${username}:${Date.now()}`);
       
-      // Зберігаємо токен в cookie
       Cookies.set(AUTH_COOKIE_NAME, token, { 
         expires: AUTH_COOKIE_EXPIRES,
         secure: process.env.NODE_ENV === 'production',
