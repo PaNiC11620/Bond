@@ -19,6 +19,11 @@ export const OrderModal: React.FC<OrderModalProps> = ({ coffee, isOpen, onClose 
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedOrderData, setSubmittedOrderData] = useState<{
+    packageSize: string;
+    quantity: number;
+    totalPrice: number;
+  } | null>(null);
 
   if (!isOpen) return null;
 
@@ -43,6 +48,12 @@ export const OrderModal: React.FC<OrderModalProps> = ({ coffee, isOpen, onClose 
     setIsSubmitting(true);
 
     try {
+      const orderData = {
+        packageSize: formData.packageSize,
+        quantity: formData.quantity,
+        totalPrice: getTotalPrice()
+      };
+
       await createOrder({
         customer_name: formData.customerName,
         customer_phone: formData.customerPhone,
@@ -52,7 +63,8 @@ export const OrderModal: React.FC<OrderModalProps> = ({ coffee, isOpen, onClose 
         quantity: formData.quantity,
         total_price: getTotalPrice()
       });
-
+      
+      setSubmittedOrderData(orderData); 
       setIsSubmitted(true);
 
       setFormData({
@@ -65,6 +77,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({ coffee, isOpen, onClose 
 
       setTimeout(() => {
         setIsSubmitted(false);
+        setSubmittedOrderData(null);
         onClose();
       }, 3000);
     } catch (error) {
@@ -130,15 +143,15 @@ export const OrderModal: React.FC<OrderModalProps> = ({ coffee, isOpen, onClose 
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-green-800 font-medium">Розфасовка:</span>
-                      <span className="text-green-900 font-bold">{formData.packageSize}</span>
+                       <span className="text-green-900 font-bold">{submittedOrderData?.packageSize}</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-green-800 font-medium">Кількість:</span>
-                      <span className="text-green-900 font-bold">{formData.quantity} шт</span>
+                      <span className="text-green-900 font-bold">{submittedOrderData?.quantity} шт</span>
                     </div>
                     <div className="border-t border-green-200 pt-2 flex justify-between items-center">
                       <span className="text-green-800 font-bold text-lg">Сума:</span>
-                      <span className="text-green-900 font-bold text-xl">{getTotalPrice()} грн</span>
+                     <span className="text-green-900 font-bold text-xl">{submittedOrderData?.totalPrice} грн</span>
                     </div>
                   </div>
                 </div>
