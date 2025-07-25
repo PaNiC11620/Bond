@@ -209,9 +209,9 @@ export const OrderModal: React.FC<OrderModalProps> = ({ coffee, isOpen, onClose 
                   onChange={handleChange}
                   className="w-full pl-10 pr-4 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
                 >
-                  <option value="250g">250г - {coffee.details.price250g} грн</option>
-                  <option value="500g">500г - {coffee.details.price500g} грн</option>
-                  <option value="1kg">1кг - {coffee.details.price1kg} грн</option>
+                  <option value="250г">250г - {coffee.details.price250g} грн</option>
+                  <option value="500г">500г - {coffee.details.price500g} грн</option>
+                  <option value="1кг">1кг - {coffee.details.price1kg} грн</option>
                 </select>
               </div>
 
