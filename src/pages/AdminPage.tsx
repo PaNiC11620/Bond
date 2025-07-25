@@ -9,10 +9,6 @@ export const AdminPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-<<<<<<< HEAD
-=======
-    // Перевіряємо авторизацію при завантаженні
->>>>>>> bbf8e686a8733c656b7d643d5d00180b05b8325a
     const checkAuth = () => {
       const authenticated = authService.isAuthenticated();
       setIsAuthenticated(authenticated);
