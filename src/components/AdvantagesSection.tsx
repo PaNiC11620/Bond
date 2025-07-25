@@ -23,14 +23,14 @@ export const AdvantagesSection: React.FC = () => {
     },
     {
       icon: Truck,
-      title: "Безкоштовна доставка",
-      description: "Доставляємо по всій Україні безкоштовно при замовленні від 500 грн",
+      title: "Доставка по всій Україні",
+      description: "Доставляємо по всій Україні",
       color: "from-blue-500 to-cyan-500"
     },
     {
       icon: Shield,
       title: "Гарантія якості",
-      description: "Повернемо кошти, якщо кава вас не влаштує протягом 14 днів",
+      description: "Ми гарантуємо, що кожна партія кави відповідає високим стандартам обсмаження",
       color: "from-purple-500 to-violet-500"
     },
     {

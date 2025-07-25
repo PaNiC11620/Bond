@@ -2,12 +2,12 @@ import Cookies from 'js-cookie';
 
 // Константи для авторизації (в реальному проекті це має бути в змінних середовища)
 const ADMIN_CREDENTIALS = {
-  username: 'admin',
-  password: 'bondcoffee2025'
+  username: import.meta.env.VITE_ADMIN_USERNAME,
+  password: import.meta.env.VITE_ADMIN_PASSWORD
 };
 
-const AUTH_COOKIE_NAME = 'bond_admin_auth';
-const AUTH_COOKIE_EXPIRES = 1; // 1 день
+const AUTH_COOKIE_NAME = import.meta.env.VITE_AUTH_COOKIE_NAME;
+const AUTH_COOKIE_EXPIRES = parseInt(import.meta.env.VITE_AUTH_COOKIE_EXPIRES);
 
 export interface AuthService {
   login: (username: string, password: string) => Promise<boolean>;

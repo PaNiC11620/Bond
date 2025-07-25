@@ -13,8 +13,8 @@ export const coffees: Coffee[] = [
     details: {
       brewTime: "4-6 хвилин",
       temperature: "85-90°C",
-      grindSize: "Середній помел",
-      notes: ["Темний шоколад", "Горіхи", "Карамель"],
+      grindSize: "Зерновий",
+      notes: ["Жду назву"],
       price250g: 180,
       price500g: 320,
       price1kg: 580
@@ -32,8 +32,8 @@ export const coffees: Coffee[] = [
     details: {
       brewTime: "4-5 хвилин",
       temperature: "85-88°C",
-      grindSize: "Середній помел",
-      notes: ["Цитрус", "Ягоди", "Квіткові"],
+      grindSize: "Зерновий",
+      notes: ["Жду назву"],
       price250g: 190,
       price500g: 340,
       price1kg: 620
@@ -51,8 +51,8 @@ export const coffees: Coffee[] = [
     details: {
       brewTime: "3-5 хвилин",
       temperature: "88-92°C",
-      grindSize: "Середній помел",
-      notes: ["Шоколад", "Спеції", "Горіхи"],
+      grindSize: "Зерновий",
+      notes: ["Жду назву"],
       price250g: 160,
       price500g: 280,
       price1kg: 520
@@ -70,8 +70,8 @@ export const coffees: Coffee[] = [
     details: {
       brewTime: "3-4 хвилини",
       temperature: "90-95°C",
-      grindSize: "Дрібний помел",
-      notes: ["Темний шоколад", "Какао", "Пряності"],
+      grindSize: "Зерновий",
+      notes: ["Жду назву"],
       price250g: 170,
       price500g: 300,
       price1kg: 550
@@ -89,8 +89,8 @@ export const coffees: Coffee[] = [
     details: {
       brewTime: "4-5 хвилин",
       temperature: "87-90°C",
-      grindSize: "Середній помел",
-      notes: ["Спеції", "Горіхи", "Ваніль"],
+      grindSize: "Зерновий",
+      notes: ["Жду назву"],
       price250g: 165,
       price500g: 290,
       price1kg: 530
@@ -108,8 +108,8 @@ export const coffees: Coffee[] = [
     details: {
       brewTime: "4-6 хвилин",
       temperature: "88-92°C",
-      grindSize: "Середній помел",
-      notes: ["Темні ягоди", "Шоколад", "Мед"],
+      grindSize: "Зерновий",
+      notes: ["Жду назву"],
       price250g: 200,
       price500g: 360,
       price1kg: 680

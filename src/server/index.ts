@@ -4,21 +4,17 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
-// Імпортуємо initDatabase разом з іншими функціями
-import { ordersDB, contactDB, testConnection, initDatabase } from '../lib/database.js'; // ЗМІНА ТУТ
+import { ordersDB, contactDB, testConnection, initDatabase } from '../lib/database.js'; 
 
-// ES modules compatibility
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const require = createRequire(import.meta.url);
 
-// Завантаження .env
 dotenv.config({ path: '.env' });
 
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// Middleware
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
     ? ['https://bond-coffee.onrender.com', 'https://bond-coffee-*.onrender.com']
@@ -27,7 +23,6 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Статика для продакшену
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../../dist')));
 
@@ -37,7 +32,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// API маршрути
 app.post('/api/orders', async (req, res) => {
   try {
     const order = await ordersDB.create(req.body);
@@ -91,7 +85,6 @@ app.delete('/api/orders/:id', async (req, res) => {
   }
 });
 
-// Контактні повідомлення
 app.post('/api/contact', async (req, res) => {
   try {
     const message = await contactDB.create(req.body);
@@ -123,7 +116,6 @@ app.delete('/api/contact/:id', async (req, res) => {
   }
 });
 
-// Health check
 app.get('/api/health', async (_req, res) => {
   const dbConnected = await testConnection();
   res.json({
@@ -134,10 +126,9 @@ app.get('/api/health', async (_req, res) => {
   });
 });
 
-// Запуск сервера
-const startServer = async () => { // Додаємо асинхронну функцію для запуску
+const startServer = async () => { 
   try {
-    await initDatabase(); // ВИКЛИК ФУНКЦІЇ initDatabase ТУТ
+    await initDatabase(); 
     console.log('✅ Структура БД перевірена/створена.');
 
     app.listen(PORT, () => {
@@ -146,8 +137,8 @@ const startServer = async () => { // Додаємо асинхронну фун�
     });
   } catch (error) {
     console.error('❌ Помилка запуску сервера або ініціалізації БД:', error);
-    process.exit(1); // Вийти з процесу, якщо ініціалізація БД не вдалася
+    process.exit(1); 
   }
 };
 
-startServer(); // Викликаємо асинхронну функцію
+startServer();

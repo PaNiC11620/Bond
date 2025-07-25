@@ -17,11 +17,11 @@ export const Header: React.FC = () => {
           <div className="hidden md:flex items-center space-x-6">
             <div className="flex items-center space-x-2">
               <Phone className="w-4 h-4" />
-              <span className="text-sm">+380 (67) 123-45-67</span>
+              <span className="text-sm">+380 (93) 190-67-31</span>
             </div>
             <div className="flex items-center space-x-2">
               <Mail className="w-4 h-4" />
-              <span className="text-sm">info@bondcoffee.ua</span>
+              <span className="text-sm">BondCoffe2025@ukr.net</span>
             </div>
           </div>
         </div>

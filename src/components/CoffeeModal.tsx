@@ -50,7 +50,7 @@ export const CoffeeModal: React.FC<CoffeeModalProps> = ({ coffee, isOpen, onClos
             <div className="text-right">
               <div className="text-sm font-bold text-amber-600">250г - {coffee.details.price250g} грн</div>
               <div className="text-sm font-bold text-amber-600">500г - {coffee.details.price500g} грн</div>
-              <div className="text-lg font-bold text-amber-600">1кг - {coffee.details.price1kg} грн</div>
+              <div className="text-sm font-bold text-amber-600">1кг - {coffee.details.price1kg} грн</div>
             </div>
           </div>
           

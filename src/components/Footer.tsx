@@ -40,15 +40,15 @@ export const Footer: React.FC = () => {
             <div className="space-y-3">
               <a href="tel:+380123456789" className="flex items-center space-x-2 text-amber-200 hover:text-white transition-colors">
                 <Phone className="w-4 h-4" />
-                <span>+38 (012) 345-67-89</span>
+                <span>+380 (93) 190-67-31</span>
               </a>
               <a href="mailto:info@bondcoffee.ua" className="flex items-center space-x-2 text-amber-200 hover:text-white transition-colors">
                 <Mail className="w-4 h-4" />
-                <span>info@bondcoffee.ua</span>
+                <span>BondCoffe2025@ukr.net</span>
               </a>
               <div className="flex items-start space-x-2 text-amber-200">
                 <MapPin className="w-4 h-4 mt-1" />
-                <span>вул. Кавова, 123<br />Київ, Україна</span>
+                <span>вул. Благовісна, 135<br />Черкаси, Україна</span>
               </div>
             </div>
           </div>
@@ -68,12 +68,6 @@ export const Footer: React.FC = () => {
               <div className="flex justify-between">
                 <span>Нд:</span>
                 <span>Вихідний</span>
-              </div>
-              <div className="mt-4 p-3 bg-amber-800 rounded-lg">
-                <p className="text-sm">
-                  <strong>Безкоштовна доставка</strong><br />
-                  при замовленні від 500 грн
-                </p>
               </div>
             </div>
           </div>
