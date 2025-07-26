@@ -1,8 +1,8 @@
 import Cookies from 'js-cookie';
 
 const ADMIN_CREDENTIALS = {
-  username: process.env.VITE_ADMIN_USERNAME,
-  password: process.env.VITE_ADMIN_PASSWORD
+  username: import.meta.env.VITE_ADMIN_USERNAME,
+  password: import.meta.env.VITE_ADMIN_PASSWORD
 };
 
 const AUTH_COOKIE_NAME = import.meta.env.VITE_AUTH_COOKIE_NAME;

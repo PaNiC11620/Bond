@@ -128,10 +128,10 @@ app.get('/api/health', async (_req, res) => {
 
 app.get('/api/auth/config', (_req, res) => {
   res.json({
-    username: process.env.ADMIN_USERNAME || 'admin',
-    password: process.env.ADMIN_PASSWORD || 'bondcoffee2025',
-    cookieName: process.env.AUTH_COOKIE_NAME || 'bond_admin_auth',
-    cookieExpires: parseInt(process.env.AUTH_COOKIE_EXPIRES || '1', 10)
+    username: process.env.VITE_ADMIN_USERNAME || 'admin',
+    password: process.env.VITE_ADMIN_PASSWORD || 'bondcoffee2025',
+    cookieName: process.env.VITE_AUTH_COOKIE_NAME || 'bond_admin_auth',
+    cookieExpires: parseInt(process.env.VITE_AUTH_COOKIE_EXPIRES || '1', 10)
   });
 });
 
