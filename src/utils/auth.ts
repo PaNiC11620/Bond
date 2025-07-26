@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import dotenv from 'dotenv';
-  
+
 dotenv.config({ path: '.env' });
 
 const ADMIN_CREDENTIALS = {
@@ -20,6 +20,7 @@ export interface AuthService {
 
 export const authService: AuthService = {
   async login(username: string, password: string): Promise<boolean> {
+    // Імітуємо затримку мережі
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
