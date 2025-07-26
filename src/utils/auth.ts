@@ -1,12 +1,15 @@
 import Cookies from 'js-cookie';
+import dotenv from 'dotenv';
+  
+dotenv.config({ path: '.env' });
 
 const ADMIN_CREDENTIALS = {
-  username: process.env.VITE_ADMIN_USERNAME,
-  password: process.env.VITE_ADMIN_PASSWORD
+  username: process.env.ADMIN_USERNAME || 'admin',
+  password: process.env.ADMIN_PASSWORD || 'bondcoffee2025'
 };
 
-const AUTH_COOKIE_NAME = import.meta.env.VITE_AUTH_COOKIE_NAME;
-const AUTH_COOKIE_EXPIRES = parseInt(process.env.VITE_AUTH_COOKIE_EXPIRES || '1', 10);
+const AUTH_COOKIE_NAME = process.env.AUTH_COOKIE_NAME || 'bond_admin_auth';
+const AUTH_COOKIE_EXPIRES = parseInt(process.env.AUTH_COOKIE_EXPIRES || '1', 10);
 
 export interface AuthService {
   login: (username: string, password: string) => Promise<boolean>;
@@ -43,13 +46,11 @@ export const authService: AuthService = {
     if (!token) return false;
     
     try {
-      // Перевіряємо валідність токена
       const decoded = atob(token);
       const [username, timestamp] = decoded.split(':');
       
       if (username !== ADMIN_CREDENTIALS.username) return false;
       
-      // Перевіряємо, чи не застарів токен (24 години)
       const tokenTime = parseInt(timestamp);
       const now = Date.now();
       const hoursDiff = (now - tokenTime) / (1000 * 60 * 60);
