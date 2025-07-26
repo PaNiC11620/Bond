@@ -1,24 +1,16 @@
 import Cookies from 'js-cookie';
+import dotenv from 'dotenv';
 
-// Отримуємо дані з сервера через API
-const getAuthConfig = async () => {
-  try {
-    const response = await fetch('/api/auth/config');
-    if (response.ok) {
-      return await response.json();
-    }
-  } catch (error) {
-    console.error('Помилка отримання конфігурації авторизації:', error);
-  }
-  
-  // Fallback значення
-  return {
-    username: 'admin',
-    password: 'bondcoffee2025',
-    cookieName: 'bond_admin_auth',
-    cookieExpires: 1
-  };
+// Завантажуємо змінні середовища
+dotenv.config({ path: '.env' });
+
+const ADMIN_CREDENTIALS = {
+  username: process.env.ADMIN_USERNAME || 'admin',
+  password: process.env.ADMIN_PASSWORD || 'bondcoffee2025'
 };
+
+const AUTH_COOKIE_NAME = process.env.AUTH_COOKIE_NAME || 'bond_admin_auth';
+const AUTH_COOKIE_EXPIRES = parseInt(process.env.AUTH_COOKIE_EXPIRES || '1', 10);
 
 export interface AuthService {
   login: (username: string, password: string) => Promise<boolean>;
@@ -29,15 +21,14 @@ export interface AuthService {
 
 export const authService: AuthService = {
   async login(username: string, password: string): Promise<boolean> {
+    // Імітуємо затримку мережі
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    const config = await getAuthConfig();
-    
-    if (username === config.username && password === config.password) {
+    if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
       const token = btoa(`${username}:${Date.now()}`);
       
-      Cookies.set(config.cookieName, token, { 
-        expires: config.cookieExpires,
+      Cookies.set(AUTH_COOKIE_NAME, token, { 
+        expires: AUTH_COOKIE_EXPIRES,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict'
       });
@@ -49,21 +40,19 @@ export const authService: AuthService = {
   },
 
   logout(): void {
-    // Використовуємо стандартне ім'я cookie для видалення
-    Cookies.remove('bond_admin_auth');
+    Cookies.remove(AUTH_COOKIE_NAME);
   },
 
   isAuthenticated(): boolean {
-    const token = Cookies.get('bond_admin_auth');
+    const token = Cookies.get(AUTH_COOKIE_NAME);
     if (!token) return false;
     
     try {
-      const config = { username: 'admin' }; // Fallback для перевірки
       // Перевіряємо валідність токена
       const decoded = atob(token);
       const [username, timestamp] = decoded.split(':');
       
-      if (username !== config.username) return false;
+      if (username !== ADMIN_CREDENTIALS.username) return false;
       
       // Перевіряємо, чи не застарів токен (24 години)
       const tokenTime = parseInt(timestamp);
@@ -77,6 +66,6 @@ export const authService: AuthService = {
   },
 
   getAuthToken(): string | undefined {
-    return Cookies.get('bond_admin_auth');
+    return Cookies.get(AUTH_COOKIE_NAME);
   }
 };
