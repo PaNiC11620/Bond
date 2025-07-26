@@ -1,15 +1,13 @@
 import Cookies from 'js-cookie';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env' });
 
 const ADMIN_CREDENTIALS = {
-  username: process.env.ADMIN_USERNAME || 'admin',
-  password: process.env.ADMIN_PASSWORD || 'bondcoffee2025'
+  username: process.env.VITE_ADMIN_USERNAME,
+  password: process.env.VITE_ADMIN_PASSWORD
 };
 
-const AUTH_COOKIE_NAME = process.env.AUTH_COOKIE_NAME || 'bond_admin_auth';
-const AUTH_COOKIE_EXPIRES = parseInt(process.env.AUTH_COOKIE_EXPIRES || '1', 10);
+const AUTH_COOKIE_NAME = import.meta.env.VITE_AUTH_COOKIE_NAME;
+const AUTH_COOKIE_EXPIRES = parseInt(process.env.VITE_AUTH_COOKIE_EXPIRES || '1', 10);
+
 
 export interface AuthService {
   login: (username: string, password: string) => Promise<boolean>;
@@ -20,7 +18,6 @@ export interface AuthService {
 
 export const authService: AuthService = {
   async login(username: string, password: string): Promise<boolean> {
-    // Імітуємо затримку мережі
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
