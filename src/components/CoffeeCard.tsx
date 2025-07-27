@@ -1,15 +1,28 @@
 import React from 'react';
 import { Coffee } from '../types/coffee';
-import { Package } from 'lucide-react';
+import { Package, ShoppingCart } from 'lucide-react';
+import { useCart } from '../hooks/useCart';
 
 interface CoffeeCardProps {
   coffee: Coffee;
   isActive: boolean;
   onLearnMore: () => void;
-  onOrder: () => void;
 }
 
-export const CoffeeCard: React.FC<CoffeeCardProps> = ({ coffee, isActive, onLearnMore, onOrder }) => {
+export const CoffeeCard: React.FC<CoffeeCardProps> = ({ coffee, isActive, onLearnMore }) => {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (packageSize: string, price: number) => {
+    addToCart({
+      coffeeId: coffee.id,
+      coffeeName: coffee.name,
+      coffeeImage: coffee.imageUrl,
+      packageSize,
+      quantity: 1,
+      pricePerItem: price
+    });
+  };
+
   return (
     <div className={`transform transition-all duration-700 ease-in-out ${isActive ? 'scale-100 opacity-100' : 'scale-95 opacity-60'}`}>
       <div className="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-md mx-auto hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 border border-amber-100">
@@ -72,35 +85,53 @@ export const CoffeeCard: React.FC<CoffeeCardProps> = ({ coffee, isActive, onLear
               <p className="text-sm text-amber-900 font-bold mx-3">Ціни</p>
               <div className="w-8 h-0.5 bg-gradient-to-l from-transparent to-amber-300"></div>
             </div>
-            <div className="flex items-center justify-between text-sm mb-1">
+            <div className="flex items-center justify-between text-sm mb-2">
               <span className="text-amber-800 font-medium">250г</span>
-              <span className="font-bold text-amber-900 bg-gradient-to-r from-white to-amber-50 px-3 py-1.5 rounded-lg shadow-sm border border-amber-200">{coffee.details.price250g} грн</span>
+              <div className="flex items-center space-x-2">
+                <span className="font-bold text-amber-900 bg-gradient-to-r from-white to-amber-50 px-3 py-1.5 rounded-lg shadow-sm border border-amber-200">{coffee.details.price250g} грн</span>
+                <button
+                  onClick={() => handleAddToCart('250г', coffee.details.price250g)}
+                  className="bg-amber-900 hover:bg-amber-800 text-white p-1.5 rounded-lg transition-colors"
+                  title="Додати в корзину"
+                >
+                  <ShoppingCart className="w-3 h-3" />
+                </button>
+              </div>
             </div>
-            <div className="flex items-center justify-between text-sm mb-1">
+            <div className="flex items-center justify-between text-sm mb-2">
               <span className="text-amber-800 font-medium">500г</span>
-              <span className="font-bold text-amber-900 bg-gradient-to-r from-white to-amber-50 px-3 py-1.5 rounded-lg shadow-sm border border-amber-200">{coffee.details.price500g} грн</span>
+              <div className="flex items-center space-x-2">
+                <span className="font-bold text-amber-900 bg-gradient-to-r from-white to-amber-50 px-3 py-1.5 rounded-lg shadow-sm border border-amber-200">{coffee.details.price500g} грн</span>
+                <button
+                  onClick={() => handleAddToCart('500г', coffee.details.price500g)}
+                  className="bg-amber-900 hover:bg-amber-800 text-white p-1.5 rounded-lg transition-colors"
+                  title="Додати в корзину"
+                >
+                  <ShoppingCart className="w-3 h-3" />
+                </button>
+              </div>
             </div>
             <div className="flex items-center justify-between text-sm">
               <span className="text-amber-800 font-medium">1кг</span>
-              <span className="font-bold text-amber-900 bg-gradient-to-r from-white to-amber-50 px-3 py-1.5 rounded-lg shadow-sm border border-amber-200">{coffee.details.price1kg} грн</span>
+              <div className="flex items-center space-x-2">
+                <span className="font-bold text-amber-900 bg-gradient-to-r from-white to-amber-50 px-3 py-1.5 rounded-lg shadow-sm border border-amber-200">{coffee.details.price1kg} грн</span>
+                <button
+                  onClick={() => handleAddToCart('1кг', coffee.details.price1kg)}
+                  className="bg-amber-900 hover:bg-amber-800 text-white p-1.5 rounded-lg transition-colors"
+                  title="Додати в корзину"
+                >
+                  <ShoppingCart className="w-3 h-3" />
+                </button>
+              </div>
             </div>
           </div>
           
-          <div className="flex space-x-3">
-            <button 
-              onClick={onLearnMore}
-              className="flex-1 border-2 border-amber-900 text-amber-900 hover:bg-gradient-to-r hover:from-amber-900 hover:to-orange-800 hover:text-white py-3 px-4 rounded-full transition-all duration-300 font-bold text-sm hover:shadow-lg hover:-translate-y-0.5"
-            >
-              Детальніше
-            </button>
-            <button 
-              onClick={onOrder}
-              className="flex-1 bg-gradient-to-r from-amber-900 to-orange-800 hover:from-amber-800 hover:to-orange-700 text-white py-3 px-4 rounded-full transition-all duration-300 font-bold hover:shadow-xl transform hover:scale-105 hover:-translate-y-0.5 flex items-center justify-center space-x-2 text-sm"
-            >
-              <Package className="w-4 h-4" />
-              <span>Замовити</span>
-            </button>
-          </div>
+          <button 
+            onClick={onLearnMore}
+            className="w-full border-2 border-amber-900 text-amber-900 hover:bg-gradient-to-r hover:from-amber-900 hover:to-orange-800 hover:text-white py-3 px-4 rounded-full transition-all duration-300 font-bold text-sm hover:shadow-lg hover:-translate-y-0.5"
+          >
+            Детальніше
+          </button>
         </div>
       </div>
     </div>

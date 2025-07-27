@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { CoffeeCard } from './CoffeeCard';
 import { CoffeeModal } from './CoffeeModal';
-import { OrderModal } from './OrderModal';
 import { coffees } from '../data/coffees';
 import { Coffee } from '../types/coffee';
 
@@ -11,7 +10,6 @@ export const CoffeeSlider: React.FC = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [selectedCoffee, setSelectedCoffee] = useState<Coffee | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
 
   const nextSlide = () => {
     if (isAnimating) return;
@@ -39,41 +37,28 @@ export const CoffeeSlider: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleOrder = (coffee: Coffee) => {
-    setSelectedCoffee(coffee);
-    setIsOrderModalOpen(true);
-  };
 
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedCoffee(null);
   };
 
-  const closeOrderModal = () => {
-    setIsOrderModalOpen(false);
-    setSelectedCoffee(null);
-  };
-
-  const openOrderFromModal = () => {
-    setIsModalOpen(false);
-    setIsOrderModalOpen(true);
-  };
 
   // Auto-advance slides every 6 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!isModalOpen && !isOrderModalOpen) {
+      if (!isModalOpen) {
         nextSlide();
       }
     }, 6000);
 
     return () => clearInterval(interval);
-  }, [isAnimating, isModalOpen, isOrderModalOpen]);
+  }, [isAnimating, isModalOpen]);
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (isModalOpen || isOrderModalOpen) return;
+      if (isModalOpen) return;
       if (event.key === 'ArrowLeft') prevSlide();
       if (event.key === 'ArrowRight') nextSlide();
       if (event.key === 'Enter' || event.key === ' ') {
@@ -84,7 +69,7 @@ export const CoffeeSlider: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isAnimating, currentIndex, isModalOpen, isOrderModalOpen]);
+  }, [isAnimating, currentIndex, isModalOpen]);
 
   return (
     <div className="relative w-full max-w-6xl mx-auto">
@@ -100,7 +85,6 @@ export const CoffeeSlider: React.FC = () => {
                 coffee={coffee} 
                 isActive={index === currentIndex}
                 onLearnMore={() => handleLearnMore(coffee)}
-                onOrder={() => handleOrder(coffee)}
               />
             </div>
           ))}
@@ -153,19 +137,11 @@ export const CoffeeSlider: React.FC = () => {
 
       {/* Modals */}
       {selectedCoffee && (
-        <>
-          <CoffeeModal 
-            coffee={selectedCoffee}
-            isOpen={isModalOpen}
-            onClose={closeModal}
-            onOrder={openOrderFromModal}
-          />
-          <OrderModal 
-            coffee={selectedCoffee}
-            isOpen={isOrderModalOpen}
-            onClose={closeOrderModal}
-          />
-        </>
+        <CoffeeModal 
+          coffee={selectedCoffee}
+          isOpen={isModalOpen}
+          onClose={closeModal}
+        />
       )}
     </div>
   );
