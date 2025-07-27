@@ -1,17 +1,15 @@
 import React from 'react';
-import { X, Clock, Thermometer, Coffee as CoffeeIcon, Tag, Package, ShoppingCart } from 'lucide-react';
+import { X, Clock, Thermometer, Coffee as CoffeeIcon, Tag, Package } from 'lucide-react';
 import { Coffee } from '../types/coffee';
-import { useCart } from '../hooks/useCart';
 
 interface CoffeeModalProps {
   coffee: Coffee;
   isOpen: boolean;
   onClose: () => void;
+  onOrder: () => void;
 }
 
-export const CoffeeModal: React.FC<CoffeeModalProps> = ({ coffee, isOpen, onClose }) => {
-  const { addToCart } = useCart();
-
+export const CoffeeModal: React.FC<CoffeeModalProps> = ({ coffee, isOpen, onClose, onOrder }) => {
   if (!isOpen) return null;
 
   const handleBackdropClick = (e: React.MouseEvent) => {
@@ -20,16 +18,6 @@ export const CoffeeModal: React.FC<CoffeeModalProps> = ({ coffee, isOpen, onClos
     }
   };
 
-  const handleAddToCart = (packageSize: string, price: number) => {
-    addToCart({
-      coffeeId: coffee.id,
-      coffeeName: coffee.name,
-      coffeeImage: coffee.imageUrl,
-      packageSize,
-      quantity: 1,
-      pricePerItem: price
-    });
-  };
   return (
     <div 
       className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
@@ -146,38 +134,25 @@ export const CoffeeModal: React.FC<CoffeeModalProps> = ({ coffee, isOpen, onClos
               <div className="text-center p-3 bg-white rounded-lg border border-amber-200">
                 <div className="font-bold text-amber-900">250г</div>
                 <div className="text-amber-600">{coffee.details.price250g} грн</div>
-                <button
-                  onClick={() => handleAddToCart('250г', coffee.details.price250g)}
-                  className="mt-2 bg-amber-900 hover:bg-amber-800 text-white px-3 py-1 rounded text-xs transition-colors flex items-center space-x-1 mx-auto"
-                >
-                  <ShoppingCart className="w-3 h-3" />
-                  <span>В корзину</span>
-                </button>
               </div>
               <div className="text-center p-3 bg-white rounded-lg border border-amber-200">
                 <div className="font-bold text-amber-900">500г</div>
                 <div className="text-amber-600">{coffee.details.price500g} грн</div>
-                <button
-                  onClick={() => handleAddToCart('500г', coffee.details.price500g)}
-                  className="mt-2 bg-amber-900 hover:bg-amber-800 text-white px-3 py-1 rounded text-xs transition-colors flex items-center space-x-1 mx-auto"
-                >
-                  <ShoppingCart className="w-3 h-3" />
-                  <span>В корзину</span>
-                </button>
               </div>
               <div className="text-center p-3 bg-white rounded-lg border border-amber-200">
                 <div className="font-bold text-amber-900">1кг</div>
                 <div className="text-amber-600">{coffee.details.price1kg} грн</div>
-                <button
-                  onClick={() => handleAddToCart('1кг', coffee.details.price1kg)}
-                  className="mt-2 bg-amber-900 hover:bg-amber-800 text-white px-3 py-1 rounded text-xs transition-colors flex items-center space-x-1 mx-auto"
-                >
-                  <ShoppingCart className="w-3 h-3" />
-                  <span>В корзину</span>
-                </button>
               </div>
             </div>
           </div>
+          
+          <button 
+            onClick={onOrder}
+            className="w-full bg-amber-900 hover:bg-amber-800 text-white py-3 px-6 rounded-xl transition-colors duration-300 font-medium flex items-center justify-center space-x-2"
+          >
+            <Package className="w-5 h-5" />
+            <span>Замовити каву</span>
+          </button>
         </div>
       </div>
     </div>

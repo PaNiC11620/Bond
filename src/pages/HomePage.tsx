@@ -5,22 +5,11 @@ import { Footer } from '../components/Footer';
 import { CoffeeSlider } from '../components/CoffeeSlider';
 import { ContactForm } from '../components/ContactForm';
 import { AdvantagesSection } from '../components/AdvantagesSection';
-import { CartModal } from '../components/CartModal';
 
 export const HomePage: React.FC = () => {
-  const [isCartOpen, setIsCartOpen] = React.useState(false);
-
-  const handleCartClick = () => {
-    setIsCartOpen(true);
-  };
-
-  const handleCartClose = () => {
-    setIsCartOpen(false);
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100">
-      <Header onCartClick={handleCartClick} />
+      <Header />
       
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
@@ -110,8 +99,6 @@ export const HomePage: React.FC = () => {
       </section>
       
       <Footer />
-      
-      <CartModal isOpen={isCartOpen} onClose={handleCartClose} />
     </div>
   );
 };

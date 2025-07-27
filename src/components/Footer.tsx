@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
               </a>
               <div className="flex items-start space-x-2 text-amber-200">
                 <MapPin className="w-4 h-4 mt-1" />
-                <span>вул. Чигиринська, 53<br />Черкаси, Україна</span>
+                <span>вул. Благовісна, 135<br />Черкаси, Україна</span>
               </div>
             </div>
           </div>
