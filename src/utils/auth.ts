@@ -6,7 +6,7 @@ const ADMIN_CREDENTIALS = {
 };
 
 const AUTH_COOKIE_NAME = import.meta.env.VITE_AUTH_COOKIE_NAME;
-const AUTH_COOKIE_EXPIRES = parseInt(process.env.VITE_AUTH_COOKIE_EXPIRES || '1', 10);
+const AUTH_COOKIE_EXPIRES = parseInt(import.meta.env.VITE_AUTH_COOKIE_EXPIRES || '1', 10);
 
 
 export interface AuthService {
