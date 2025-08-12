@@ -28,7 +28,7 @@ export const CoffeeModal: React.FC<CoffeeModalProps> = ({ coffee, isOpen, onClos
           <img 
             src={coffee.imageUrl} 
             alt={coffee.name}
-            className="w-full h-64 object-cover rounded-t-2xl"
+            className="w-full h-85 object-cover rounded-t-2xl"
           />
           <button
             onClick={onClose}

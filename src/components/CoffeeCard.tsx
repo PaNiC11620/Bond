@@ -17,7 +17,7 @@ export const CoffeeCard: React.FC<CoffeeCardProps> = ({ coffee, isActive, onLear
           <img 
             src={coffee.imageUrl} 
             alt={coffee.name}
-            className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+            className="w-full h-85 object-cover transition-transform duration-700 hover:scale-110"
           />
           {/* Градієнтний оверлей */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>

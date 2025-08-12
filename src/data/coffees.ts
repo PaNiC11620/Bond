@@ -3,11 +3,11 @@ import { Coffee } from '../types/coffee';
 export const coffees: Coffee[] = [
   {
     id: 1,
-    name: "Арабіка 100% Бразилія",
+    name: "Арабіка (70% + 30%)",
     description: "Натуральна смажена арабіка преміум класу з Бразилії. Ідеально збалансований смак з нотками темного шоколаду та горіхів.",
-    imageUrl: "https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=800",
+    imageUrl: "/images/black.jpg",
     intensity: 7,
-    origin: "Бразилія",
+    origin: "Бразилія, Ефіопія",
     roastLevel: "Середнє обсмажування",
     composition: "Арабіка натуральна смажена 100%",
     details: {
@@ -16,17 +16,17 @@ export const coffees: Coffee[] = [
       grindSize: "Зерновий",
       notes: ["Жду назву"],
       price250g: 180,
-      price500g: 320,
-      price1kg: 580
+      price500g: 370,
+      price1kg: 670
     }
   },
   {
     id: 2,
-    name: "Арабіка 100% Мікс",
+    name: "Арабіка 100%",
     description: "Натуральна смажена арабіка з найкращих плантацій Бразилії та Ефіопії. Багатогранний смак з фруктовими нотками.",
-    imageUrl: "https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg?auto=compress&cs=tinysrgb&w=800",
+    imageUrl: "/images/brown.jpg",
     intensity: 6,
-    origin: "Бразилія, Ефіопія",
+    origin: "Ефіопія",
     roastLevel: "Світле обсмажування",
     composition: "Арабіка натуральна смажена",
     details: {
@@ -34,18 +34,18 @@ export const coffees: Coffee[] = [
       temperature: "85-88°C",
       grindSize: "Зерновий",
       notes: ["Жду назву"],
-      price250g: 190,
-      price500g: 340,
-      price1kg: 620
+      price250g: 180,
+      price500g: 360,
+      price1kg: 640
     }
   },
   {
     id: 3,
-    name: "Арабіка + Робуста Класик",
+    name: "Арабіка 100%",
     description: "Збалансований бленд арабіки та робусти з трьох континентів. Насичений смак з приємною кремовою текстурою.",
-    imageUrl: "https://images.pexels.com/photos/1833769/pexels-photo-1833769.jpeg?auto=compress&cs=tinysrgb&w=800",
+    imageUrl: "/images/white.jpg",
     intensity: 8,
-    origin: "Бразилія, Ефіопія, Індія",
+    origin: "Бразилія",
     roastLevel: "Середньо-темне обсмажування",
     composition: "Арабіка натуральна смажена, Робуста натуральна смажена",
     details: {
@@ -53,18 +53,18 @@ export const coffees: Coffee[] = [
       temperature: "88-92°C",
       grindSize: "Зерновий",
       notes: ["Жду назву"],
-      price250g: 160,
-      price500g: 280,
-      price1kg: 520
+      price250g: 190,
+      price500g: 380,
+      price1kg: 700
     }
   },
   {
     id: 4,
-    name: "Арабіка + Робуста Африка",
+    name: "Купаж (40% + 40% + 20%)",
     description: "Потужний бленд з африканськими нотками. Високий вміст кофеїну та насичений смак з відтінками какао.",
-    imageUrl: "https://images.pexels.com/photos/2074130/pexels-photo-2074130.jpeg?auto=compress&cs=tinysrgb&w=800",
+    imageUrl: "/images/gold.jpg",
     intensity: 9,
-    origin: "Бразилія, Ефіопія, Уганда",
+    origin: "Бразилія, Ефіопія, Індія",
     roastLevel: "Темне обсмажування",
     composition: "Арабіка натуральна смажена, Робуста натуральна смажена",
     details: {
@@ -72,16 +72,16 @@ export const coffees: Coffee[] = [
       temperature: "90-95°C",
       grindSize: "Зерновий",
       notes: ["Жду назву"],
-      price250g: 170,
-      price500g: 300,
-      price1kg: 550
+      price250g: 180,
+      price500g: 360,
+      price1kg: 640
     }
   },
   {
     id: 5,
-    name: "Арабіка + Робуста Індія",
+    name: "Купаж (50% + 50%)",
     description: "Екзотичний бленд з індійськими нотками. М'який смак з приємною гіркотою та довгим післясмаком.",
-    imageUrl: "https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg?auto=compress&cs=tinysrgb&w=800",
+    imageUrl: "/images/silver.jpg",
     intensity: 7,
     origin: "Бразилія, Індія",
     roastLevel: "Середнє обсмажування",
@@ -91,18 +91,18 @@ export const coffees: Coffee[] = [
       temperature: "87-90°C",
       grindSize: "Зерновий",
       notes: ["Жду назву"],
-      price250g: 165,
-      price500g: 290,
-      price1kg: 530
+      price250g: 170,
+      price500g: 360,
+      price1kg: 620
     }
   },
   {
     id: 6,
-    name: "Арабіка + Робуста Преміум",
+    name: "Купаж (10% + 10% + 80%)",
     description: "Преміальний бленд з найкращих плантацій світу. Складний багатогранний смак для справжніх гурманів.",
-    imageUrl: "https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=800",
+    imageUrl: "/images/red.jpg",
     intensity: 8,
-    origin: "Ефіопія, Бразилія, Індія",
+    origin: "Бразилія, Ефіопія, Індія",
     roastLevel: "Середньо-темне обсмажування",
     composition: "Арабіка натуральна смажена, Робуста натуральна смажена",
     details: {
@@ -110,16 +110,16 @@ export const coffees: Coffee[] = [
       temperature: "88-92°C",
       grindSize: "Зерновий",
       notes: ["Жду назву"],
-      price250g: 200,
-      price500g: 360,
-      price1kg: 680
+      price250g: 160,
+      price500g: 330,
+      price1kg: 600
     }
   },
   {
     id: 7,
-    name: "Арабіка + Робуста Уганда",
+    name: "Купаж (70% + 30%)",
     description: "Унікальний африканський бленд з яскравими фруктовими нотками. Середня міцність з приємною кислинкою.",
-    imageUrl: "https://images.pexels.com/photos/1833769/pexels-photo-1833769.jpeg?auto=compress&cs=tinysrgb&w=800",
+    imageUrl: "/images/craft.jpg",
     intensity: 6,
     origin: "Уганда, Ефіопія",
     roastLevel: "Світле обсмажування",
@@ -128,29 +128,10 @@ export const coffees: Coffee[] = [
       brewTime: "4-5 хвилин",
       temperature: "85-88°C",
       grindSize: "Середній помел",
-      notes: ["Червоні ягоди", "Цитрус", "Квіткові"],
-      price250g: 175,
-      price500g: 310,
-      price1kg: 570
-    }
-  },
-  {
-    id: 8,
-    name: "Арабіка 100% Ефіопія",
-    description: "Натуральна смажена арабіка з батьківщини кави - Ефіопії. Яскравий фруктовий смак з винними нотками.",
-    imageUrl: "https://images.pexels.com/photos/2074130/pexels-photo-2074130.jpeg?auto=compress&cs=tinysrgb&w=800",
-    intensity: 5,
-    origin: "Ефіопія",
-    roastLevel: "Світле обсмажування",
-    composition: "Арабіка натуральна смажена 100%",
-    details: {
-      brewTime: "4-6 хвилин",
-      temperature: "85-90°C",
-      grindSize: "Середній помел",
-      notes: ["Червоне вино", "Ягоди", "Цитрус"],
-      price250g: 210,
-      price500g: 380,
-      price1kg: 720
-    }
+      notes: ["Жду назву"],
+      price250g: 170,
+      price500g: 330,
+      price1kg: 600
+    },
   }
 ];
