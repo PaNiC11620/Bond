@@ -129,7 +129,7 @@ export const CoffeeModal: React.FC<CoffeeModalProps> = ({ coffee, isOpen, onClos
               <Package className="w-5 h-5 text-amber-600" />
               <span className="font-medium text-amber-900">Доступні розфасовки:</span>
             </div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <div className="text-center p-3 bg-white rounded-lg border border-amber-200">
                 <div className="font-bold text-amber-900">500г</div>
                 <div className="text-amber-600">{coffee.details.price500g} грн</div>
