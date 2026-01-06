@@ -48,7 +48,6 @@ export const CoffeeModal: React.FC<CoffeeModalProps> = ({ coffee, isOpen, onClos
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-3xl font-bold text-amber-900">{coffee.name}</h2>
             <div className="text-right">
-              <div className="text-sm font-bold text-amber-600">250г - {coffee.details.price250g} грн</div>
               <div className="text-sm font-bold text-amber-600">500г - {coffee.details.price500g} грн</div>
               <div className="text-sm font-bold text-amber-600">1кг - {coffee.details.price1kg} грн</div>
             </div>
@@ -131,10 +130,6 @@ export const CoffeeModal: React.FC<CoffeeModalProps> = ({ coffee, isOpen, onClos
               <span className="font-medium text-amber-900">Доступні розфасовки:</span>
             </div>
             <div className="grid grid-cols-3 gap-4">
-              <div className="text-center p-3 bg-white rounded-lg border border-amber-200">
-                <div className="font-bold text-amber-900">250г</div>
-                <div className="text-amber-600">{coffee.details.price250g} грн</div>
-              </div>
               <div className="text-center p-3 bg-white rounded-lg border border-amber-200">
                 <div className="font-bold text-amber-900">500г</div>
                 <div className="text-amber-600">{coffee.details.price500g} грн</div>

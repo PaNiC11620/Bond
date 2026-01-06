@@ -73,10 +73,6 @@ export const CoffeeCard: React.FC<CoffeeCardProps> = ({ coffee, isActive, onLear
               <div className="w-8 h-0.5 bg-gradient-to-l from-transparent to-amber-300"></div>
             </div>
             <div className="flex items-center justify-between text-sm mb-1">
-              <span className="text-amber-800 font-medium">250г</span>
-              <span className="font-bold text-amber-900 bg-gradient-to-r from-white to-amber-50 px-3 py-1.5 rounded-lg shadow-sm border border-amber-200">{coffee.details.price250g} грн</span>
-            </div>
-            <div className="flex items-center justify-between text-sm mb-1">
               <span className="text-amber-800 font-medium">500г</span>
               <span className="font-bold text-amber-900 bg-gradient-to-r from-white to-amber-50 px-3 py-1.5 rounded-lg shadow-sm border border-amber-200">{coffee.details.price500g} грн</span>
             </div>

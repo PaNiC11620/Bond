@@ -84,7 +84,7 @@ export const AdvantagesSection: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-amber-50/50 via-orange-50/50 to-amber-50/50 rounded-2xl"></div>
             <div>
               <div className="relative z-10">
-                <div className="text-4xl font-bold bg-gradient-to-r from-amber-900 to-orange-800 bg-clip-text text-transparent mb-2">8</div>
+                <div className="text-4xl font-bold bg-gradient-to-r from-amber-900 to-orange-800 bg-clip-text text-transparent mb-2">10</div>
                 <div className="text-amber-700 font-medium">Унікальних сортів</div>
               </div>
             </div>
@@ -96,7 +96,7 @@ export const AdvantagesSection: React.FC = () => {
             </div>
             <div>
               <div className="relative z-10">
-                <div className="text-4xl font-bold bg-gradient-to-r from-amber-900 to-orange-800 bg-clip-text text-transparent mb-2">24h</div>
+                <div className="text-4xl font-bold bg-gradient-to-r from-amber-900 to-orange-800 bg-clip-text text-transparent mb-2">56h</div>
                 <div className="text-amber-700 font-medium">Швидка доставка</div>
               </div>
             </div>

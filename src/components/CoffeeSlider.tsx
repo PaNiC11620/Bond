@@ -65,7 +65,7 @@ export const CoffeeSlider: React.FC = () => {
       if (!isModalOpen && !isOrderModalOpen) {
         nextSlide();
       }
-    }, 6000);
+    }, 25000);
 
     return () => clearInterval(interval);
   }, [isAnimating, isModalOpen, isOrderModalOpen]);

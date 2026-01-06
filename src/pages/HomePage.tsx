@@ -30,7 +30,7 @@ export const HomePage: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-              <div className="text-3xl font-bold bg-gradient-to-r from-amber-900 to-orange-800 bg-clip-text text-transparent">8</div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-amber-900 to-orange-800 bg-clip-text text-transparent">10</div>
               <div className="text-amber-700 text-sm font-medium">Унікальних сортів</div>
             </div>
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
@@ -38,7 +38,7 @@ export const HomePage: React.FC = () => {
               <div className="text-amber-700 text-sm font-medium">Натуральна кава</div>
             </div>
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-              <div className="text-3xl font-bold bg-gradient-to-r from-amber-900 to-orange-800 bg-clip-text text-transparent">24h</div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-amber-900 to-orange-800 bg-clip-text text-transparent">56h</div>
               <div className="text-amber-700 text-sm font-medium">Свіжість</div>
             </div>
           </div>

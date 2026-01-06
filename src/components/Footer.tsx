@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
               </div>
             </div>
             <p className="text-amber-200 leading-relaxed mb-4">
-              Ми обсмажуємо найкращі кавові зерна з усього світу та пакуємо їх у зручні пакети 250г, 500г та 1кг. 
+              Ми обсмажуємо найкращі кавові зерна з усього світу та пакуємо їх у зручні пакети 500г, 1кг та можливість продажі без пакування. 
               Кожна партія обсмажується з любов'ю та увагою до деталей.
             </p>
             <div className="flex space-x-4">
@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
               </a>
               <div className="flex items-start space-x-2 text-amber-200">
                 <MapPin className="w-4 h-4 mt-1" />
-                <span>вул. Благовісна, 135<br />Черкаси, Україна</span>
+                <span>вул. Чигиринська, 23/1<br />Черкаси, Україна</span>
               </div>
             </div>
           </div>
