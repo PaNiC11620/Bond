@@ -7,6 +7,11 @@ export const Header: React.FC = () => {
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
+            <img 
+              src="/images/logo.jpg" // Шлях до вашого логотипу
+              alt="Bond Coffee Logo"
+              className="h-14 w-auto" // Відрегулюйте розмір
+            />
             <Coffee className="w-8 h-8" />
             <div>
               <h1 className="text-2xl font-bold">Bond Coffee</h1>
