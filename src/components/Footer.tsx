@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
             <div className="space-y-3">
               <a href="tel:+380123456789" className="flex items-center space-x-2 text-amber-200 hover:text-white transition-colors">
                 <Phone className="w-4 h-4" />
-                <span>+380 (93) 190-67-31</span>
+                <span>+380 (67) 764-44-60</span>
               </a>
               <a href="mailto:info@bondcoffee.ua" className="flex items-center space-x-2 text-amber-200 hover:text-white transition-colors">
                 <Mail className="w-4 h-4" />
